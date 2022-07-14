@@ -3,7 +3,7 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import CategoryCreate from "./CategoryCreate";
+import CreateCategoryForm from "./CreateCategoryForm";
 import { createQueryClient } from "tests/utils";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -20,7 +20,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-describe("CategoryCreate tests", () => {
+describe("CreateCategoryForm tests", () => {
   let queryClient: QueryClient;
 
   beforeEach(() => {
@@ -32,10 +32,10 @@ describe("CategoryCreate tests", () => {
     queryClient.clear();
   });
 
-  test("Submitting form with emtpy name input should not be allowed", async () => {
+  test("Should not submit form with empty name field", async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <CategoryCreate />
+        <CreateCategoryForm />
       </QueryClientProvider>
     );
     const button = screen.getByRole("button");
@@ -45,10 +45,28 @@ describe("CategoryCreate tests", () => {
     ).toBeInTheDocument();
   });
 
+  test("Should not submit form with category name that is forbidden", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <CreateCategoryForm forbiddenCategoryNames={["forbidden"]} />
+      </QueryClientProvider>
+    );
+
+    const nameInput = await screen.findByLabelText("Name");
+    userEvent.type(nameInput, "forbidden");
+    const button = screen.getByRole("button");
+
+    fireEvent.click(button);
+
+    expect(
+      await screen.findByText("A category with that name already exist")
+    ).toBeInTheDocument();
+  });
+
   test("Should clear input value after submission", async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <CategoryCreate />
+        <CreateCategoryForm />
       </QueryClientProvider>
     );
 

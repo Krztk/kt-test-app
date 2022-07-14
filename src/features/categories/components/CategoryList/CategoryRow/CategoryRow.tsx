@@ -24,6 +24,7 @@ const CategoryRow = ({
           aria-label="edit category"
           loading={isLoading}
           variant="filled"
+          data-testid="edit"
         >
           <BsPen />
         </ActionIcon>
@@ -33,6 +34,7 @@ const CategoryRow = ({
           loading={isLoading}
           variant="filled"
           aria-label="remove category"
+          data-testid="remove"
         >
           <BsTrash />
         </ActionIcon>

@@ -10,6 +10,7 @@ import { useUpdateCategory } from "../../api/updateCategory";
 import { Table } from "@mantine/core";
 import { validationSchema } from "../../validationSchemas/categoryValidationSchema";
 import { DangerousActionModal } from "components/modals";
+import CreateCategoryForm from "../CreateCategoryForm/CreateCategoryForm";
 
 export interface EditCategoryFormInput {
   name: string;
@@ -25,7 +26,9 @@ const CategoryList = () => {
   );
   const updateCategoryMutation = useUpdateCategory();
   const [modalOpened, setModalOpened] = useState(false);
-
+  const usedNames =
+    categoriesQuery.data?.map((x) => x.name.toLowerCase()) ?? [];
+  const oldValue = editedCategory?.name.toLowerCase();
   const {
     handleSubmit,
     control,
@@ -38,6 +41,7 @@ const CategoryList = () => {
       name: "",
     },
     shouldFocusError: true,
+    context: { categories: usedNames, oldValue: oldValue },
   });
 
   if (categoriesQuery.isLoading) {
@@ -77,6 +81,7 @@ const CategoryList = () => {
 
   return (
     <>
+      <CreateCategoryForm forbiddenCategoryNames={usedNames} />
       <form onSubmit={handleSubmit(onSubmitForm)}>
         <Table>
           <thead>

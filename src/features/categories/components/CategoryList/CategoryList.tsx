@@ -7,7 +7,7 @@ import { CategoryDTO } from "../../types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useUpdateCategory } from "../../api/updateCategory";
-import { Table } from "@mantine/core";
+import { Table, Text } from "@mantine/core";
 import { validationSchema } from "../../validationSchemas/categoryValidationSchema";
 import { DangerousActionModal } from "components/modals";
 import CreateCategoryForm from "../CreateCategoryForm/CreateCategoryForm";
@@ -49,11 +49,7 @@ const CategoryList = () => {
   }
 
   if (categoriesQuery.isError) {
-    return <h4>Something's gone wrong</h4>;
-  }
-
-  if (!categoriesQuery?.data?.length) {
-    return <h4>No categories found</h4>;
+    return <Text color="dimmed">Something's gone wrong</Text>;
   }
 
   const onSubmitForm: SubmitHandler<EditCategoryFormInput> = async (values) => {
@@ -79,42 +75,49 @@ const CategoryList = () => {
     reset({ name: category.name });
   };
 
+  const hasData = !!categoriesQuery?.data?.length;
+  const categories = categoriesQuery?.data ?? [];
+
   return (
     <>
       <CreateCategoryForm forbiddenCategoryNames={usedNames} />
-      <form onSubmit={handleSubmit(onSubmitForm)}>
-        <Table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categoriesQuery.data.map((category) =>
-              editedCategory != null && category.id === editedCategory.id ? (
-                <EditableCategoryRow
-                  key={category.id}
-                  isLoading={isSubmitting}
-                  onCancel={() => setEditedCategory(null)}
-                  control={control}
-                />
-              ) : (
-                <CategoryRow
-                  key={category.id}
-                  name={category.name}
-                  isLoading={removeCategoryMutation.isLoading}
-                  onEdit={() => onEdit(category)}
-                  onRemove={() => {
-                    setCategoryToRemove(category);
-                    setModalOpened(true);
-                  }}
-                />
-              )
-            )}
-          </tbody>
-        </Table>
-      </form>
+      {hasData ? (
+        <form onSubmit={handleSubmit(onSubmitForm)}>
+          <Table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {categories.map((category) =>
+                editedCategory != null && category.id === editedCategory.id ? (
+                  <EditableCategoryRow
+                    key={category.id}
+                    isLoading={isSubmitting}
+                    onCancel={() => setEditedCategory(null)}
+                    control={control}
+                  />
+                ) : (
+                  <CategoryRow
+                    key={category.id}
+                    name={category.name}
+                    isLoading={removeCategoryMutation.isLoading}
+                    onEdit={() => onEdit(category)}
+                    onRemove={() => {
+                      setCategoryToRemove(category);
+                      setModalOpened(true);
+                    }}
+                  />
+                )
+              )}
+            </tbody>
+          </Table>
+        </form>
+      ) : (
+        <Text color="dimmed">No categories found</Text>
+      )}
       <DangerousActionModal
         opened={modalOpened}
         message={`Do you really want to delete category '${categoryToRemove?.name}'?`}

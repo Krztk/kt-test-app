@@ -3,7 +3,6 @@ import {
   AppShell,
   Navbar,
   Header,
-  Footer,
   Text,
   MediaQuery,
   Burger,
@@ -35,6 +34,7 @@ export const AppLayout = () => {
           width={{ sm: 200, lg: 300 }}
         >
           <Link to="/app/categories">Categories</Link>
+          <Link to="/app/questions">Questions</Link>
         </Navbar>
       }
       header={

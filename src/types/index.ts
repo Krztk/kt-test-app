@@ -7,3 +7,8 @@ export interface HookFormControlled<TFieldValues> {
 export interface ErrorResponseDTO {
   error: string;
 }
+
+export type Paginated<T> = {
+  lastPage: boolean;
+  data: T[];
+};

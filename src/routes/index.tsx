@@ -10,6 +10,7 @@ const Landing = () => {
     <div>
       <p>temporary landing</p>
       <Link to="app/categories/">Categories</Link>
+      <Link to="app/questions/">Questions</Link>
     </div>
   );
 };

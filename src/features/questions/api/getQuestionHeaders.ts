@@ -12,7 +12,7 @@ export const getQuestionHeaders = (
 ): Promise<Paginated<QuestionHeaderDTO>> => {
   const filterQueryParams = categoryId ? `&categoryId=${categoryId}` : "";
   return axios.get(
-    `/questions/headers?Offset=${offset}&Limit=${limit}${filterQueryParams}`
+    `/questions/headers?offset=${offset}&limit=${limit}${filterQueryParams}`
   );
 };
 

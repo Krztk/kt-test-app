@@ -1,4 +1,4 @@
-import { Box, Button, Group, Select } from "@mantine/core";
+import { Button, Group, Select } from "@mantine/core";
 import { mapToSelectEntry, useCategories } from "features/categories";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

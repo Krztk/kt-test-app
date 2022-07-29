@@ -16,7 +16,7 @@ const Search = ({ isLoading, selectedId, onFilter }: SearchProps) => {
     setCategoryId(selectedId);
   }, [selectedId]);
 
-  const categoriesQuery = useCategories({});
+  const categoriesQuery = useCategories();
   const categories = categoriesQuery.data ? categoriesQuery.data : [];
   const selectEntries = categories.map((c) => mapToSelectEntry(c));
   const searchLink = categoryId ? `?categoryId=${categoryId}` : "";

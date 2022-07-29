@@ -14,7 +14,7 @@ type UseCategoriesOptions = {
   config?: QueryConfig<QueryFnType>;
 };
 
-export const useCategories = ({ config }: UseCategoriesOptions) => {
+export const useCategories = ({ config }: UseCategoriesOptions = {}) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     queryKey: categoryKeys.all,
     queryFn: () => getCategories(),

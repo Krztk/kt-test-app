@@ -16,7 +16,7 @@ export interface EditCategoryFormInput {
   name: string;
 }
 const CategoryList = () => {
-  const categoriesQuery = useCategories({});
+  const categoriesQuery = useCategories();
   const removeCategoryMutation = useRemoveCategory();
   const [editedCategory, setEditedCategory] = useState<CategoryDTO | null>(
     null

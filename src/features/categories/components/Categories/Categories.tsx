@@ -17,7 +17,7 @@ interface CategoriesProps {
 }
 
 const Categories = ({ categoryIds }: CategoriesProps) => {
-  const categoriesQuery = useCategories({});
+  const categoriesQuery = useCategories();
   const categories = useMemo(() => {
     return categoriesQuery.isFetched
       ? mapCategoryIdsToCategoryNames(categoryIds, categoriesQuery.data ?? [])

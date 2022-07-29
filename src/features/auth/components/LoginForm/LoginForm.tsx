@@ -9,7 +9,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { validationSchema } from "./validationSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { login } from "../../helpers/authenticationHelpers";
-import { ErrorMessage } from "components/forms/ErrorMessage/ErrorMessage";
+import { ErrorMessage } from "components/forms";
 import { getErrorMessage } from "utils/errorHelpers";
 
 const LoginForm = () => {

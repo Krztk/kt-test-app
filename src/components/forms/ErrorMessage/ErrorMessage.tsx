@@ -2,6 +2,7 @@ import { createStyles, MantineStyleSystemProps, Text } from "@mantine/core";
 
 const useStyles = createStyles((theme, _params, _getRef) => ({
   error: {
+    fontSize: "12px",
     marginTop: theme.spacing.xs / 2,
     wordBreak: "break-word",
     color: theme.colors.red[theme.colorScheme === "dark" ? 6 : 7],

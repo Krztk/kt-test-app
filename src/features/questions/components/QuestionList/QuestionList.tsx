@@ -58,6 +58,8 @@ export const QuestionList = () => {
               <td>
                 <Group noWrap spacing="xs">
                   <ActionIcon
+                    component={Link}
+                    to={`/app/questions/edit/${header.id}`}
                     aria-label="edit category"
                     variant="filled"
                     data-testid="edit"

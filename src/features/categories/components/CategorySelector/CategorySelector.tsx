@@ -24,7 +24,6 @@ export const CategorySelector = <TFieldValues extends FieldValues>({
         control={control}
         render={({ field, fieldState: { error } }) => {
           const entries = categories.map(mapToSelectEntry);
-          console.log("field value", field.value);
           return (
             <MultiSelect
               label="Categories"

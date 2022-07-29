@@ -8,8 +8,10 @@ export type QuestionHeaderDTO = {
   id: number;
   content: string;
   numberOfTimesUsedInTests: number;
-  type: "Written" | "Single choice" | "Multiple choice";
+  type: AnswerType;
 };
+
+export type AnswerType = "Written" | "Single choice" | "Multiple choice";
 
 export type Question = {
   id: number;

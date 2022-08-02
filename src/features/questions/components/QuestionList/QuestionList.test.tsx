@@ -76,7 +76,7 @@ describe("when question headers API endpoint returns some questions", () => {
     const question1ContentCell = await screen.findByText(
       "Who was the first person in space?"
     );
-    const question1TypeCell = question1ContentCell.nextSibling;
+    const question1TypeCell = question1ContentCell.parentNode?.nextSibling;
     const question1UsedInTests = question1TypeCell?.nextSibling;
     expect(question1TypeCell?.textContent).toBe("Written");
     expect(question1UsedInTests?.textContent).toBe("3");
@@ -84,7 +84,7 @@ describe("when question headers API endpoint returns some questions", () => {
     const question2ContentCell = await screen.findByText(
       "Who was the second emperor of Rome?"
     );
-    const question2TypeCell = question2ContentCell.nextSibling;
+    const question2TypeCell = question2ContentCell.parentNode?.nextSibling;
     const question2UsedInTests = question2TypeCell?.nextSibling;
     expect(question2TypeCell?.textContent).toBe("Single choice");
     expect(question2UsedInTests?.textContent).toBe("0");
@@ -92,7 +92,7 @@ describe("when question headers API endpoint returns some questions", () => {
     const question3ContentCell = await screen.findByText(
       "Select prime numbers"
     );
-    const question3TypeCell = question3ContentCell.nextSibling;
+    const question3TypeCell = question3ContentCell.parentNode?.nextSibling;
     const question3UsedInTests = question3TypeCell?.nextSibling;
     expect(question3TypeCell?.textContent).toBe("Multiple choice");
     expect(question3UsedInTests?.textContent).toBe("1");

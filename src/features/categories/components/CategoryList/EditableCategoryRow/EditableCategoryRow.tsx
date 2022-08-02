@@ -3,7 +3,6 @@ import { Control } from "react-hook-form";
 import { ActionIcon, Group } from "@mantine/core";
 import { TextInput } from "components/forms";
 import { EditCategoryFormInput } from "../CategoryList";
-import styles from "./EditableCategoryRow.module.scss";
 
 interface EditableCategoryRowProps {
   isLoading: boolean;
@@ -16,7 +15,7 @@ const EditableCategoryRow = ({
   control,
 }: EditableCategoryRowProps) => (
   <tr>
-    <td className={styles.name}>
+    <td>
       <TextInput name="name" control={control} />
     </td>
     <td>

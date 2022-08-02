@@ -1,6 +1,5 @@
 import { ActionIcon, Group } from "@mantine/core";
 import { BsPen, BsTrash } from "react-icons/bs";
-import styles from "./CategoryRow.module.scss";
 
 interface CategoryRowProps {
   name: string;
@@ -16,7 +15,7 @@ const CategoryRow = ({
   onRemove,
 }: CategoryRowProps) => (
   <tr>
-    <td className={styles.name}>{name}</td>
+    <td>{name}</td>
     <td>
       <Group noWrap spacing="xs">
         <ActionIcon

@@ -1,4 +1,12 @@
-import { ActionIcon, Button, Group, Table } from "@mantine/core";
+import {
+  ActionIcon,
+  Anchor,
+  Button,
+  Group,
+  Loader,
+  Text,
+  Table,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { Pagination } from "components/common";
 import { DangerousActionModal } from "components/modals";
@@ -27,6 +35,8 @@ export const QuestionList = () => {
 
   const lastPage = questionHeaderQuery.data?.lastPage ?? false;
   const headers = questionHeaderQuery.data?.data ?? [];
+  const loading = questionHeaderQuery.isLoading;
+  const hasData = !!questionHeaderQuery?.data?.data.length;
 
   return (
     <>
@@ -43,16 +53,20 @@ export const QuestionList = () => {
       <Table mb="md">
         <thead>
           <tr>
-            <th>Content</th>
-            <th>Type</th>
+            <th style={{ width: "100%" }}>Content</th>
+            <th style={{ minWidth: "95px" }}>Type</th>
             <th style={{ whiteSpace: "nowrap" }}>In Tests</th>
-            <th>Actions</th>
+            <th style={{ minWidth: "66px" }}>Actions</th>
           </tr>
         </thead>
         <tbody>
           {headers.map((header) => (
             <tr key={header.id}>
-              <td style={{ width: "100%" }}>{header.content}</td>
+              <td style={{ width: "100%" }}>
+                <Anchor component={Link} to={`/app/questions/${header.id}`}>
+                  {header.content}
+                </Anchor>
+              </td>
               <td style={{ whiteSpace: "nowrap" }}>{header.type}</td>
               <td>{header.numberOfTimesUsedInTests}</td>
               <td>
@@ -85,6 +99,14 @@ export const QuestionList = () => {
           ))}
         </tbody>
       </Table>
+      {questionHeaderQuery.isFetched && !hasData && (
+        <Text color="dimmed">No questions found</Text>
+      )}
+      {loading && (
+        <Group position="center">
+          <Loader mt="xl" mb="xl" size="xl" />
+        </Group>
+      )}
       <Pagination
         onNextPage={handleNextPage}
         onPrevPage={handlePreviousPage}

@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { render, screen, waitFor } from "@testing-library/react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import Categories from "./Categories";
+import { Categories } from "./Categories";
 import { createQueryClient } from "tests/utils";
 
 const API_URL = process.env.REACT_APP_API_URL;

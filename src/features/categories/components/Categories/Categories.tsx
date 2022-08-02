@@ -16,7 +16,7 @@ interface CategoriesProps {
   categoryIds: number[];
 }
 
-const Categories = ({ categoryIds }: CategoriesProps) => {
+export const Categories = ({ categoryIds }: CategoriesProps) => {
   const categoriesQuery = useCategories();
   const categories = useMemo(() => {
     return categoriesQuery.isFetched
@@ -29,28 +29,23 @@ const Categories = ({ categoryIds }: CategoriesProps) => {
   }
 
   return (
-    <Box mb="sm">
-      <Text mb="sm">CATEGORIES:</Text>
-      <Group spacing="sm">
-        {categoriesQuery.isLoading ? (
-          <Skeleton width={120} height={8} radius="xl" />
-        ) : (
-          <>
-            {!categories.length && <Text color="gray">No categories</Text>}
-            {categories.map((category, index) => (
-              <Badge
-                key={index}
-                variant="gradient"
-                gradient={{ from: "indigo", to: "cyan" }}
-              >
-                {category}
-              </Badge>
-            ))}
-          </>
-        )}
-      </Group>
-    </Box>
+    <Group spacing="sm">
+      {categoriesQuery.isLoading ? (
+        <Skeleton width={120} height={8} radius="xl" />
+      ) : (
+        <>
+          {!categories.length && <Text color="gray">No categories</Text>}
+          {categories.map((category, index) => (
+            <Badge
+              key={index}
+              variant="gradient"
+              gradient={{ from: "indigo", to: "cyan" }}
+            >
+              {category}
+            </Badge>
+          ))}
+        </>
+      )}
+    </Group>
   );
 };
-
-export default Categories;

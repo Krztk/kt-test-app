@@ -9,7 +9,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <MantineProvider theme={{ colorScheme: "light" }} withNormalizeCSS>
+    <MantineProvider
+      theme={{ colorScheme: "light" }}
+      withNormalizeCSS
+      withGlobalStyles
+    >
       <App />
     </MantineProvider>
   </React.StrictMode>

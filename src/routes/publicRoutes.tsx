@@ -1,5 +1,4 @@
-import { AuthRoutes } from "features/auth/routes";
-import { Navigate } from "react-router-dom";
+import { AuthRoutes, AuthGate } from "features/auth";
 
 export const publicRoutes = [
   {
@@ -8,6 +7,6 @@ export const publicRoutes = [
   },
   {
     path: "/app/*",
-    element: <Navigate to="/auth/login" />,
+    element: <AuthGate />,
   },
 ];

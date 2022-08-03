@@ -2,6 +2,7 @@ import storage from "utils/storage";
 import { LoginCredentialsDTO, loginWithEmailAndPassword } from "../api/login";
 import { LoginResponseDTO, UserData } from "../types";
 import { getUserData } from "../helpers/tokenHelpers";
+import { flushSync } from "react-dom";
 
 export async function login(
   data: LoginCredentialsDTO,
@@ -22,5 +23,7 @@ function handleUserResponse(
   const { token } = data;
   const userData = getUserData(token);
   storage.setUserData(userData);
-  setUser(userData);
+  flushSync(() => {
+    setUser(userData);
+  });
 }

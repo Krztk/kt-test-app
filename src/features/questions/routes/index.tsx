@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import { QuestionDetails } from "../components/QuestionDetails/QuestionDetails";
 import { AddQuestion } from "./AddQuestion";
 import { EditQuestion } from "./EditQuestion";
+import { Question } from "./Question";
 import { Questions } from "./Questions";
 
 export const QuestionsRoutes = () => {
@@ -10,7 +10,7 @@ export const QuestionsRoutes = () => {
       <Route path="" element={<Questions />} />
       <Route path="add" element={<AddQuestion />} />
       <Route path="edit/:questionId" element={<EditQuestion />} />
-      <Route path=":questionId" element={<QuestionDetails />} />
+      <Route path=":questionId" element={<Question />} />
     </Routes>
   );
 };

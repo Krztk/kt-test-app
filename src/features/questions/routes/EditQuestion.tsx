@@ -1,3 +1,4 @@
+import { Title } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { useQuestion } from "../api/getQuestion";
 import { useUpdateQuestion } from "../api/updateQuestion";
@@ -20,10 +21,15 @@ export const EditQuestion = () => {
     });
   };
   return (
-    <QuestionForm
-      initialValuesQuery={questionQuery}
-      onSubmit={onSubmit}
-      submitText={"Save"}
-    />
+    <>
+      <Title mb="md" order={2}>
+        Edit question
+      </Title>
+      <QuestionForm
+        initialValuesQuery={questionQuery}
+        onSubmit={onSubmit}
+        submitText={"Save"}
+      />
+    </>
   );
 };

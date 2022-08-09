@@ -35,6 +35,7 @@ export const AppLayout = () => {
         >
           <Link to="/app/categories">Categories</Link>
           <Link to="/app/questions">Questions</Link>
+          <Link to="/app/test-templates">Test Templates</Link>
         </Navbar>
       }
       header={
